@@ -154,11 +154,11 @@ function Write-Log {
 
 ##loop for service
 
-#while($true){
+while($true){
 runScanClassification
-#runScanAdminCount
-#Start-Sleep –Seconds 60
-#}
+runScanAdminCount
+Start-Sleep –Seconds 60
+}
 
 
 
