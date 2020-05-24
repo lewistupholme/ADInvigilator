@@ -1,0 +1,2 @@
+"winlog.event_data.TargetUserName","DistinguishedName","Created"
+"James Smith","CN=James Smith,CN=Users,DC=production,DC=local","3/24/2020 10:24:15 AM"
