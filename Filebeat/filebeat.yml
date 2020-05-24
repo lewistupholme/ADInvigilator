@@ -21,11 +21,17 @@ filebeat.inputs:
 - type: log
 
   # Change to true to enable this input configuration.
-  enabled: false
+  enabled: true
 
   # Paths that should be crawled and fetched. Glob based paths.
   paths:
-    - /var/log/*.log
+    - C:\ADInvigilator\logs\classification-logs\*
+    - C:\ADInvigilator\logs\token-size-logs\*
+    - C:\ADInvigilator\logs\empty-group-logs\*
+    - C:\ADInvigilator\logs\inactive-user-logs\*
+    - C:\ADInvigilator\logs\users-nogroup-logs\*
+    - C:\ADInvigilator\logs\admin-count-logs\*
+    - C:\ADInvigilator\ps_error_logs\*
     #- c:\programdata\elasticsearch\logs\*
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
@@ -114,7 +120,7 @@ setup.template.settings:
 
 # Starting with Beats version 6.0.0, the dashboards are loaded via the Kibana API.
 # This requires a Kibana endpoint configuration.
-setup.kibana:
+#setup.kibana:
 
   # Kibana Host
   # Scheme and port can be left out and will be set to the default (http and 5601)
@@ -145,9 +151,9 @@ setup.kibana:
 # Configure what output to use when sending the data collected by the beat.
 
 #-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
+#output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["localhost:9200"]
+  #hosts: ["localhost:9200"]
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
@@ -155,9 +161,11 @@ output.elasticsearch:
   #password: "changeme"
 
 #----------------------------- Logstash output --------------------------------
-#output.logstash:
+output.logstash:
   # The Logstash hosts
   #hosts: ["localhost:5044"]
+  hosts: ["www.adinvigilator.co.uk:5044"]
+  #ssl.certificate_authorities: "C:/Program Files/Winlogbeat/logstash.crt"
 
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications

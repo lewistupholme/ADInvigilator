@@ -18,25 +18,42 @@
 # visit the documentation for the complete details of each option.
 # https://go.es.io/WinlogbeatConfig
 winlogbeat.event_logs:
-  - name: Application
-    ignore_older: 72h
-
-  - name: System
-
   - name: Security
     processors:
-      - script:
-          lang: javascript
-          id: security
-          file: ${path.home}/module/security/config/winlogbeat-security.js
-
-  - name: Microsoft-Windows-Sysmon/Operational
-    processors:
-      - script:
-          lang: javascript
-          id: sysmon
-          file: ${path.home}/module/sysmon/config/winlogbeat-sysmon.js
-
+        -drop_event.when.not.or:
+        - equals.event_id: 4723
+        - equals.event_id: 4728
+        - equals.event_id: 4732
+        - equals.event_id: 4756
+        - equals.event_id: 4735
+        - equals.event_id: 4724
+        - equals.event_id: 4625
+        - equals.event_id: 4648
+        - equals.event_id: 1102
+        - equals.event_id: 4624
+        - equals.event_id: 5038
+        - equals.event_id: 6281
+        - equals.event_id: 4727
+        - equals.event_id: 4740
+        - equals.event_id: 4767
+        - equals.event_id: 4725
+        - equals.event_id: 4722
+        - equals.event_id: 4731
+        - equals.event_id: 4754
+        - equals.event_id: 4720
+        - equals.event_id: 4737
+        - equals.event_id: 5136
+        - equals.event_id: 4634
+        - equals.event_id: 4723
+        - equals.event_id: 4729
+        - equals.event_id: 4730
+        - equals.event_id: 4733
+        - equals.event_id: 4734
+        - equals.event_id: 4755
+        - equals.event_id: 4757
+        - equals.event_id: 4758
+        - equals.event_id: 4764
+    ignore_older: 72h
 #==================== Elasticsearch template settings ==========================
 
 setup.template.settings:
@@ -79,7 +96,7 @@ setup.template.settings:
 # This requires a Kibana endpoint configuration.
 setup.kibana:
 
-  # Kibana Host
+  host: "www.adinvigilator.co.uk"
   # Scheme and port can be left out and will be set to the default (http and 5601)
   # In case you specify and additional path, the scheme is required: http://localhost:5601/path
   # IPv6 addresses should always be defined as: https://[2001:db8::1]:5601
@@ -108,9 +125,9 @@ setup.kibana:
 # Configure what output to use when sending the data collected by the beat.
 
 #-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
+#output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["localhost:9200"]
+  #hosts: ["localhost:9200"]
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
@@ -118,10 +135,11 @@ output.elasticsearch:
   #password: "changeme"
 
 #----------------------------- Logstash output --------------------------------
-#output.logstash:
+output.logstash:
   # The Logstash hosts
-  #hosts: ["localhost:5044"]
-
+    hosts: ["www.adinvigilator.co.uk:5044"]
+    index: winlogbeat
+    #ssl.certificate_authorities: "C:/Program Files/Winlogbeat/logstash.crt"
   # Optional SSL. By default is off.
   # List of root certificates for HTTPS server verifications
   #ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
