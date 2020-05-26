@@ -27,7 +27,7 @@
                 },
                 {
                   "term": {
-                    "login_error_msg.keyword": "Login Failure"
+                    "login_error_msg.keyword": "Unknown user name or bad password."
                   }
                 }
               ]
