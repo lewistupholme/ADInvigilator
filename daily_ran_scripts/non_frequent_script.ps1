@@ -160,7 +160,7 @@ function Write-Log {
          time = (Get-Date -f g)
          ps_message = $message
          error = $error
-         location = "master_script.ps1"
+         location = "non_frequent_script.ps1"
      } | Export-Csv -Path "C:\ADInvigilator\ps_error_logs\error.csv" -Append -NoTypeInformation
  
  }
